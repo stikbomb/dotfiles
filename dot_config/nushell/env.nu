@@ -1,18 +1,19 @@
 # env.nu
-#
-# Installed by:
-# version = "0.110.0"
-#
-# Previously, environment variables were typically configured in `env.nu`.
-# In general, most configuration can and should be performed in `config.nu`
-# or one of the autoload directories.
-#
-# This file is generated for backwards compatibility for now.
-# It is loaded before config.nu and login.nu
-#
-# See https://www.nushell.sh/book/configuration.html
-#
-# Also see `help config env` for more options.
-#
-# You can remove these comments if you want or leave
-# them for future reference.
+
+# ── PATH ──────────────────────────────────────────────────────────────────────
+$env.PATH = ($env.PATH | split row (char esep) | prepend [
+    ($env.HOME | path join ".local/bin")
+] | uniq)
+
+# ── Editor ────────────────────────────────────────────────────────────────────
+$env.EDITOR = "nvim"
+$env.VISUAL = "nvim"
+
+# ── Man pages через bat ───────────────────────────────────────────────────────
+$env.MANROFFOPT = "-c"
+$env.MANPAGER = "sh -c 'col -bx | bat -l man -p'"
+
+# ── Starship ──────────────────────────────────────────────────────────────────
+$env.STARSHIP_SHELL = "nu"
+mkdir ($env.HOME | path join ".cache/starship")
+starship init nu | save -f ($env.HOME | path join ".cache/starship/init.nu")

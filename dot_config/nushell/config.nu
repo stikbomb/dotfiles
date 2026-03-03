@@ -1,5 +1,25 @@
 # config.nu
 
+# ── Starship prompt ───────────────────────────────────────────────────────────
+use ($env.HOME | path join ".cache/starship/init.nu")
+
+# ── Настройки ─────────────────────────────────────────────────────────────────
+$env.config.show_banner = false
+$env.config.history.max_size = 100_000
+$env.config.history.sync_on_enter = true
+$env.config.history.file_format = "sqlite"
+$env.config.completions.algorithm = "fuzzy"
+$env.config.edit_mode = "vi"
+
+# ── Алиасы ───────────────────────────────────────────────────────────────────
+alias ll = ls -la
+alias la = ls -a
+alias cat = bat
+alias grep = rg
+alias top = btop
+alias cm = chezmoi
+alias v = nvim
+
 # ── Package management ────────────────────────────────────────────────────────
 
 # Установить пакеты через paru и добавить в dotfiles tracking
