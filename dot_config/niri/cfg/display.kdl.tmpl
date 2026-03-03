@@ -1,16 +1,25 @@
 // ────────────── Output Configuration ──────────────
-// You can run `niri msg outputs` to get the correct name for your displays.
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
 
 {{ if eq .machine "desktop" -}}
-/- output "DP-1" {
-    mode "2560x1440@359.979"
+// Bottom: LG HDR WQHD 3440x1440 (HDMI-A-1)
+output "HDMI-A-1" {
+    mode "3440x1440@84.979"
+    position x=0 y=0
+    scale 1
+}
+
+// Top: LG HDR WFHD 2560x1080 (HDMI-A-2), centered above
+output "HDMI-A-2" {
+    mode "2560x1080@59.978"
+    position x=440 y=-1080
     scale 1
 }
 {{ else if eq .machine "laptop" -}}
-// laptop output config — fill in after running `niri msg outputs`
+// laptop — fill in after running `niri msg outputs`
 /- output "eDP-1" {
     mode "1920x1080@60"
+    position x=0 y=0
     scale 1
 }
 {{ end -}}
