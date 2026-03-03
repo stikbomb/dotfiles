@@ -1,0 +1,35 @@
+# Терминал и оболочка
+alacritty
+nushell
+fastfetch
+zellij
+yazi
+
+# Редакторы
+neovim
+micro
+
+# Утилиты
+btop
+ripgrep
+git
+paru
+chezmoi
+ufw
+syncthing
+cliphist
+nwg-clipman
+
+# Приложения
+firefox
+vivaldi
+vivaldi-ffmpeg-codecs
+bitwarden
+bitwarden-cli
+obsidian
+pavucontrol
+mongodb-compass
+claude-code
+
+# Медиа
+vlc-plugins-all
