@@ -1,6 +1,7 @@
 # Терминал и оболочка
 alacritty
 nushell
+starship
 fastfetch
 zellij
 yazi
