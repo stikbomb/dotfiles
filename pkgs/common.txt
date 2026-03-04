@@ -40,3 +40,7 @@ openconnect
 gnome-disk-utility
 carapace
 termius
+pyright
+npm
+uv
+poetry
