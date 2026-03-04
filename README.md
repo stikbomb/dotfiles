@@ -65,6 +65,12 @@ git add -A && git commit -m "..." && git push    # запушить
 chezmoi re-add ~/.config/niri/cfg/keybinds.kdl  # подтянуть изменения в source
 ```
 
+После изменений нири конфига перечитать его без перезапуска:
+
+```sh
+niri msg action load-config-file  # перечитать конфиг без перезапуска
+```
+
 ## Синхронизация между машинами
 
 ```sh
