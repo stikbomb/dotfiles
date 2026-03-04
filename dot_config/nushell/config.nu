@@ -1,7 +1,7 @@
 # config.nu
 
 # ── Starship prompt ───────────────────────────────────────────────────────────
-use ($env.HOME | path join ".cache/starship/init.nu")
+use ~/.cache/starship/init.nu
 
 # ── Настройки ─────────────────────────────────────────────────────────────────
 $env.config.show_banner = false
