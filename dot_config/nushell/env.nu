@@ -5,9 +5,14 @@ $env.PATH = ($env.PATH | split row (char esep) | prepend [
     ($env.HOME | path join ".local/bin")
 ] | uniq)
 
-# ── Editor ────────────────────────────────────────────────────────────────────
+# ── Editor / Browser ─────────────────────────────────────────────────────────
 $env.EDITOR = "nva"
 $env.VISUAL = "nva"
+$env.BROWSER = "vivaldi-stable"
+
+# ── Theming ───────────────────────────────────────────────────────────────────
+$env.QT_QPA_PLATFORMTHEME = "qt5ct"
+$env.GTK_THEME = "adw-gtk3-dark"
 
 # ── Man pages через bat ───────────────────────────────────────────────────────
 $env.MANROFFOPT = "-c"

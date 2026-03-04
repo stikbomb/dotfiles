@@ -39,3 +39,4 @@ expect
 openconnect
 gnome-disk-utility
 carapace
+termius
