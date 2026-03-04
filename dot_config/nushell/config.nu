@@ -19,6 +19,7 @@ alias grep = rg
 alias top = btop
 alias cm = chezmoi
 alias v = nvim
+alias n = nva
 
 # ── Package management ────────────────────────────────────────────────────────
 

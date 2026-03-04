@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+NVIM_APPNAME=nva exec nvim "$@"

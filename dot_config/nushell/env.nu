@@ -6,8 +6,8 @@ $env.PATH = ($env.PATH | split row (char esep) | prepend [
 ] | uniq)
 
 # ── Editor ────────────────────────────────────────────────────────────────────
-$env.EDITOR = "nvim"
-$env.VISUAL = "nvim"
+$env.EDITOR = "nva"
+$env.VISUAL = "nva"
 
 # ── Man pages через bat ───────────────────────────────────────────────────────
 $env.MANROFFOPT = "-c"
