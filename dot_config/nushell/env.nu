@@ -17,3 +17,7 @@ $env.MANPAGER = "sh -c 'col -bx | bat -l man -p'"
 $env.STARSHIP_SHELL = "nu"
 mkdir ($env.HOME | path join ".cache/starship")
 starship init nu | save -f ($env.HOME | path join ".cache/starship/init.nu")
+
+# ── Carapace ──────────────────────────────────────────────────────────────────
+mkdir ($env.HOME | path join ".cache/carapace")
+carapace _carapace nushell | save -f ($env.HOME | path join ".cache/carapace/init.nu")

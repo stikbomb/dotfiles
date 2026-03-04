@@ -3,6 +3,9 @@
 # ── Starship prompt ───────────────────────────────────────────────────────────
 use ~/.cache/starship/init.nu
 
+# ── Carapace completions ──────────────────────────────────────────────────────
+source ~/.cache/carapace/init.nu
+
 # ── Настройки ─────────────────────────────────────────────────────────────────
 $env.config.show_banner = false
 $env.config.history.max_size = 100_000
