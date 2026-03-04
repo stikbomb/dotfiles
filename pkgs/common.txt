@@ -34,3 +34,7 @@ claude-code
 
 # Медиа
 vlc-plugins-all
+
+expect
+openconnect
+gnome-disk-utility
