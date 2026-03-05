@@ -44,3 +44,5 @@ pyright
 npm
 uv
 poetry
+sublime-merge
+gnome-keyring
