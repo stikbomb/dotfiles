@@ -1,5 +1,8 @@
 # config.nu
 
+# ── Scripts ───────────────────────────────────────────────────────────────────
+source ~/.config/nushell/scripts/curl.nu
+
 # ── Starship prompt ───────────────────────────────────────────────────────────
 use ~/.cache/starship/init.nu
 
@@ -23,6 +26,7 @@ alias top = btop
 alias cm = chezmoi
 alias v = nvim
 alias n = nva
+alias va = overlay use .venv/bin/activate.nu
 
 # ── Package management ────────────────────────────────────────────────────────
 

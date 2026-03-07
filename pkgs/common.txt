@@ -47,3 +47,7 @@ poetry
 sublime-merge
 gnome-keyring
 seahorse
+appimagelauncher
+qt5-wayland
+wlsunset
+z
