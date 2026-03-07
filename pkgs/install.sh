@@ -27,4 +27,4 @@ PKGLIST=$(grep -hv '^\s*#\|^\s*$' \
     "$SCRIPT_DIR/${MACHINE}.txt" 2>/dev/null)
 
 echo "Устанавливаем пакеты..."
-echo "$PKGLIST" | paru -S --needed -
+echo "$PKGLIST" | paru -S --needed --noconfirm -
