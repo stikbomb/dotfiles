@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=MongoDB Compass
 Comment=The official GUI for MongoDB
-Exec=mongodb-compass --password-store=gnome-libsecret %U
+Exec=mongodb-compass %U
 Icon=mongodb-compass
 Type=Application
 StartupNotify=true
