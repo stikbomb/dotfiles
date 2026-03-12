@@ -51,3 +51,7 @@ appimagelauncher
 qt5-wayland
 wlsunset
 z
+direnv
+libxcrypt-compat
+defold
+wireguard-tools
