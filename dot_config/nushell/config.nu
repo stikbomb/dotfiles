@@ -2,6 +2,7 @@
 
 # ── Scripts ───────────────────────────────────────────────────────────────────
 source ~/.config/nushell/scripts/curl.nu
+source ~/.config/nushell/scripts/glc.nu
 
 # ── Starship prompt ───────────────────────────────────────────────────────────
 use ~/.cache/starship/init.nu
@@ -25,7 +26,9 @@ alias grep = rg
 alias top = btop
 alias cm = chezmoi
 alias v = nvim
-alias n = nva
+def n [...args: string] {
+    if ($args | is-empty) { nva . } else { nva ...$args }
+}
 alias va = overlay use .venv/bin/activate.nu
 
 # ── Package management ────────────────────────────────────────────────────────
