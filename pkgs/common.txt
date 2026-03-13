@@ -55,5 +55,4 @@ direnv
 libxcrypt-compat
 defold
 wireguard-tools
-
 strongswan
