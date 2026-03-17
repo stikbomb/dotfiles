@@ -1,0 +1,31 @@
+(defcfg
+  process-unmapped-keys yes
+  danger-enable-cmd yes
+  linux-dev /dev/input/event3
+)
+
+(defsrc
+  f
+)
+
+;; ──────────────────────────────────────────────
+;; Aliases
+;; ──────────────────────────────────────────────
+
+(defalias
+  ;; f: если alt зажат — сменить раскладку (если Alacritty) и отправить alt+f через wtype
+  ;;    иначе — обычная f
+  f (fork
+      f
+      (cmd sh -c "NIRI_SOCKET=$(ls /run/user/$(id -u)/niri.*.sock 2>/dev/null | head -1); export NIRI_SOCKET; niri msg focused-window 2>/dev/null | grep -qi alacritty && niri msg action switch-layout 0; wtype -M alt -k f")
+      (lalt ralt)
+    )
+)
+
+;; ──────────────────────────────────────────────
+;; Layers
+;; ──────────────────────────────────────────────
+
+(deflayer base
+  @f
+)
