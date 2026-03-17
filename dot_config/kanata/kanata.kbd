@@ -1,7 +1,9 @@
 (defcfg
   process-unmapped-keys yes
   danger-enable-cmd yes
-  linux-dev /dev/input/event3
+  linux-dev-names-include (
+    "Ergohaven K:03 PRO 43mm"
+  )
 )
 
 (defsrc
