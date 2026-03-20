@@ -56,3 +56,9 @@ libxcrypt-compat
 defold
 wireguard-tools
 strongswan
+
+docker
+docker-compose
+kanata
+wtype
+apiark
