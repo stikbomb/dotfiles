@@ -28,7 +28,7 @@
   ;;    иначе — обычная q
   q (fork
       q
-      (cmd sh -c "NIRI_SOCKET=$(ls /run/user/$(id -u)/niri.*.sock 2>/dev/null | head -1); export NIRI_SOCKET; niri msg focused-window 2>/dev/null | grep -qi rambox && wtype -M ctrl -k q || wtype -M super -k q")
+      (cmd sh -c "NIRI_SOCKET=$(ls /run/user/$(id -u)/niri.*.sock 2>/dev/null | head -1); export NIRI_SOCKET; niri msg focused-window 2>/dev/null | grep -qi rambox && wtype -M ctrl -k q || wtype -M logo -k q")
       (lmet rmet)
     )
 )
