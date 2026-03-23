@@ -62,3 +62,6 @@ docker-compose
 kanata
 wtype
 apiark
+dbeaver
+zoxide
+fuzzel
