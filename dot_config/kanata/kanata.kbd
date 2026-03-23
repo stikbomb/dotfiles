@@ -7,7 +7,7 @@
 )
 
 (defsrc
-  f q
+  lmet f q
 )
 
 ;; ──────────────────────────────────────────────
@@ -23,14 +23,16 @@
       (lalt ralt)
     )
 
-  ;; q: если meta зажат и окно Rambox — отправить ctrl+q
-  ;;    если meta зажат и другое окно — пропустить meta+q как есть
-  ;;    иначе — обычная q
-  q (fork
-      q
-      (cmd sh -c "NIRI_SOCKET=$(ls /run/user/$(id -u)/niri.*.sock 2>/dev/null | head -1); export NIRI_SOCKET; niri msg focused-window 2>/dev/null | grep -qi rambox && wtype -M ctrl -k q || wtype -k q")
-      (lmet rmet)
-    )
+  ;; lmet: эмитить lmet нативно + активировать слой meta-held
+  met (multi lmet (layer-while-held meta-held))
+
+  ;; q в слое meta-held:
+  ;;   - если Rambox: отправить ctrl+q через wtype
+  ;;   - всегда: эмитить q нативно (lmet уже зажат на том же устройстве → compositor видит lmet+q)
+  mq (multi
+       (cmd sh -c "NIRI_SOCKET=$(ls /run/user/$(id -u)/niri.*.sock 2>/dev/null | head -1); export NIRI_SOCKET; niri msg focused-window 2>/dev/null | grep -qi rambox && wtype -M ctrl -k q")
+       q
+     )
 )
 
 ;; ──────────────────────────────────────────────
@@ -38,5 +40,9 @@
 ;; ──────────────────────────────────────────────
 
 (deflayer base
-  @f @q
+  @met @f q
+)
+
+(deflayer meta-held
+  lmet @f @mq
 )
