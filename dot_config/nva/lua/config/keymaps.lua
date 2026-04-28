@@ -32,3 +32,20 @@ end, { desc = "Terminal (Root Dir)" })
 vim.keymap.set("t", "<F12>", function()
   Snacks.terminal(nil, { cwd = LazyVim.root() })
 end, { desc = "Terminal (Root Dir)" })
+
+-- Auto-import: удаляет слово под курсором и вставляет заново,
+-- чтобы pyright показал completion с auto-import
+vim.keymap.set("n", "<leader>ci", function()
+  local word = vim.fn.expand("<cword>")
+  if word == "" then return end
+  -- ciw + вставить слово обратно + открыть completion
+  local keys = vim.api.nvim_replace_termcodes("ciw" .. word, true, false, true)
+  vim.api.nvim_feedkeys(keys, "n", false)
+  -- небольшая задержка чтобы LSP успел отреагировать, затем completion
+  vim.defer_fn(function()
+    vim.api.nvim_feedkeys(
+      vim.api.nvim_replace_termcodes("<C-n>", true, false, true),
+      "i", false
+    )
+  end, 50)
+end, { desc = "Re-trigger auto-import completion" })

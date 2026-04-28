@@ -41,7 +41,17 @@ return {
             },
           },
         },
-        pyright = {}, -- Keep Pyright for type checking
+        pyright = {
+          settings = {
+            python = {
+              analysis = {
+                autoImportCompletions = true,
+                autoSearchPaths = true,
+                useLibraryCodeForTypes = true,
+              },
+            },
+          },
+        },
         lua_ls = {
           settings = {
             Lua = {
