@@ -65,3 +65,10 @@ apiark
 dbeaver
 zoxide
 fuzzel
+steam
+python-debugpy
+zed
+vscode
+warp
+warp-terminal
+sshs

@@ -31,6 +31,19 @@
 
 return {
   {
+    "mfussenegger/nvim-lint",
+    opts = function(_, opts)
+      local linters = require("lint").linters
+      if linters["markdownlint-cli2"] then
+        linters["markdownlint-cli2"].args = {
+          "--config", vim.fn.expand("~/.markdownlint.json"),
+          "--",
+        }
+      end
+      return opts
+    end,
+  },
+  {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {

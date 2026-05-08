@@ -34,18 +34,17 @@ vim.keymap.set("t", "<F12>", function()
 end, { desc = "Terminal (Root Dir)" })
 
 -- Auto-import: удаляет слово под курсором и вставляет заново,
--- чтобы pyright показал completion с auto-import
+-- открывает LSP omnifunc completion для выбора варианта с импортом
 vim.keymap.set("n", "<leader>ci", function()
   local word = vim.fn.expand("<cword>")
   if word == "" then return end
-  -- ciw + вставить слово обратно + открыть completion
   local keys = vim.api.nvim_replace_termcodes("ciw" .. word, true, false, true)
   vim.api.nvim_feedkeys(keys, "n", false)
-  -- небольшая задержка чтобы LSP успел отреагировать, затем completion
   vim.defer_fn(function()
+    -- C-x C-o = omnifunc (LSP) completion, показывает только LSP-варианты с auto-import
     vim.api.nvim_feedkeys(
-      vim.api.nvim_replace_termcodes("<C-n>", true, false, true),
+      vim.api.nvim_replace_termcodes("<C-x><C-o>", true, false, true),
       "i", false
     )
-  end, 50)
+  end, 100)
 end, { desc = "Re-trigger auto-import completion" })

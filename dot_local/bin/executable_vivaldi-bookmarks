@@ -7,14 +7,17 @@ import sys
 from pathlib import Path
 
 BOOKMARKS = Path.home() / ".config/vivaldi/Default/Bookmarks"
+FOLDERS = {"mc", "gt"}
 
 
-def collect(node, items):
-    if node.get("type") == "url":
+def collect(node, items, inside=False):
+    if node.get("type") == "folder":
+        inside = inside or node.get("name", "") in FOLDERS
+    if node.get("type") == "url" and inside:
         name = node["name"].strip() or node["url"]
         items.append((name, node["url"]))
     for child in node.get("children", []):
-        collect(child, items)
+        collect(child, items, inside)
 
 
 def main():
