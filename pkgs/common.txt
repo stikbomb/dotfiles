@@ -72,3 +72,6 @@ vscode
 warp
 warp-terminal
 sshs
+strawberry
+discord
+vlc
