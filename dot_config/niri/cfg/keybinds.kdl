@@ -9,6 +9,7 @@ binds {
     Mod+Shift+ESCAPE                     { show-hotkey-overlay; }
 
     // ─── Applications ───
+    Mod+N           allow-inhibiting=false hotkey-overlay-title="Toggle Obsidian" { spawn-sh "/home/stik/.config/niri/scripts/obsidian-toggle.sh"; }
     Mod+Return      allow-inhibiting=false hotkey-overlay-title="Open Terminal: Alacritty" { spawn "alacritty"; }
     Mod+D           allow-inhibiting=false hotkey-overlay-title="Open App Launcher: noctalia launcher" { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
     Mod+B           allow-inhibiting=false hotkey-overlay-title="Open Browser: Vivaldi" { spawn "vivaldi"; }
