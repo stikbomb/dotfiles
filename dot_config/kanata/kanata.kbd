@@ -7,7 +7,7 @@
 )
 
 (defsrc
-  lmet f q
+  lmet f q t p h j k l
 )
 
 ;; ──────────────────────────────────────────────
@@ -20,6 +20,48 @@
   f (fork
       f
       (cmd sh -c "NIRI_SOCKET=$(ls /run/user/$(id -u)/niri.*.sock 2>/dev/null | head -1); export NIRI_SOCKET; niri msg focused-window 2>/dev/null | grep -qi alacritty && niri msg action switch-layout 0; wtype -M alt -k f")
+      (lalt ralt)
+    )
+
+  ;; t: если ctrl зажат — сменить раскладку (если Alacritty) и отправить ctrl+t через wtype
+  ;;    иначе — обычная t
+  t (fork
+      t
+      (cmd sh -c "NIRI_SOCKET=$(ls /run/user/$(id -u)/niri.*.sock 2>/dev/null | head -1); export NIRI_SOCKET; niri msg focused-window 2>/dev/null | grep -qi alacritty && niri msg action switch-layout 0; wtype -M ctrl -k t")
+      (lctl rctl)
+    )
+
+  ;; p: если ctrl зажат — сменить раскладку (если Alacritty) и отправить ctrl+p через wtype
+  ;;    иначе — обычная p
+  p (fork
+      p
+      (cmd sh -c "NIRI_SOCKET=$(ls /run/user/$(id -u)/niri.*.sock 2>/dev/null | head -1); export NIRI_SOCKET; niri msg focused-window 2>/dev/null | grep -qi alacritty && niri msg action switch-layout 0; wtype -M ctrl -k p")
+      (lctl rctl)
+    )
+
+  ;; h/j/k/l: если alt зажат — сменить раскладку (если Alacritty) и отправить alt+<key> через wtype
+  ;;    иначе — обычная буква
+  h (fork
+      h
+      (cmd sh -c "NIRI_SOCKET=$(ls /run/user/$(id -u)/niri.*.sock 2>/dev/null | head -1); export NIRI_SOCKET; niri msg focused-window 2>/dev/null | grep -qi alacritty && niri msg action switch-layout 0; wtype -M alt -k h")
+      (lalt ralt)
+    )
+
+  j (fork
+      j
+      (cmd sh -c "NIRI_SOCKET=$(ls /run/user/$(id -u)/niri.*.sock 2>/dev/null | head -1); export NIRI_SOCKET; niri msg focused-window 2>/dev/null | grep -qi alacritty && niri msg action switch-layout 0; wtype -M alt -k j")
+      (lalt ralt)
+    )
+
+  k (fork
+      k
+      (cmd sh -c "NIRI_SOCKET=$(ls /run/user/$(id -u)/niri.*.sock 2>/dev/null | head -1); export NIRI_SOCKET; niri msg focused-window 2>/dev/null | grep -qi alacritty && niri msg action switch-layout 0; wtype -M alt -k k")
+      (lalt ralt)
+    )
+
+  l (fork
+      l
+      (cmd sh -c "NIRI_SOCKET=$(ls /run/user/$(id -u)/niri.*.sock 2>/dev/null | head -1); export NIRI_SOCKET; niri msg focused-window 2>/dev/null | grep -qi alacritty && niri msg action switch-layout 0; wtype -M alt -k l")
       (lalt ralt)
     )
 
@@ -40,9 +82,9 @@
 ;; ──────────────────────────────────────────────
 
 (deflayer base
-  @met @f q
+  @met @f q @t @p @h @j @k @l
 )
 
 (deflayer meta-held
-  lmet @f @mq
+  lmet @f @mq @t @p @h @j @k @l
 )
