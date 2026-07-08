@@ -7,7 +7,7 @@
 )
 
 (defsrc
-  lmet f q t p h j k l
+  lmet f q t p h j k l v
 )
 
 ;; ──────────────────────────────────────────────
@@ -65,6 +65,18 @@
       (lalt ralt)
     )
 
+  ;; v: если ctrl+shift зажаты вместе — сменить раскладку (если Alacritty) и отправить ctrl+shift+v через wtype
+  ;;    иначе (в т.ч. просто ctrl+v) — обычная v
+  v (fork
+      v
+      (fork
+        v
+        (cmd sh -c "NIRI_SOCKET=$(ls /run/user/$(id -u)/niri.*.sock 2>/dev/null | head -1); export NIRI_SOCKET; niri msg focused-window 2>/dev/null | grep -qi alacritty && niri msg action switch-layout 0; wtype -M ctrl -M shift -k v")
+        (lctl rctl)
+      )
+      (lsft rsft)
+    )
+
   ;; lmet: эмитить lmet нативно + активировать слой meta-held
   met (multi lmet (layer-while-held meta-held))
 
@@ -82,9 +94,9 @@
 ;; ──────────────────────────────────────────────
 
 (deflayer base
-  @met @f q @t @p @h @j @k @l
+  @met @f q @t @p @h @j @k @l @v
 )
 
 (deflayer meta-held
-  lmet @f @mq @t @p @h @j @k @l
+  lmet @f @mq @t @p @h @j @k @l @v
 )
