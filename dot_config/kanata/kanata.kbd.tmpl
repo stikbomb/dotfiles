@@ -2,12 +2,16 @@
   process-unmapped-keys yes
   danger-enable-cmd yes
   linux-dev-names-include (
+    {{ if eq .machine "desktop" -}}
     "Ergohaven K:03 PRO 43mm"
+    {{- else if eq .machine "laptop" -}}
+    "AT Translated Set 2 keyboard"
+    {{- end }}
   )
 )
 
 (defsrc
-  lmet f q t p h j k l v
+  lmet f q t p h j k l v{{ if eq .machine "laptop" }} spc{{ end }}
 )
 
 ;; ──────────────────────────────────────────────
@@ -87,6 +91,10 @@
        (cmd sh -c "NIRI_SOCKET=$(ls /run/user/$(id -u)/niri.*.sock 2>/dev/null | head -1); export NIRI_SOCKET; niri msg focused-window 2>/dev/null | grep -qi rambox && wtype -M ctrl -k q")
        q
      )
+{{- if eq .machine "laptop" }}
+  ;; spc: тап — пробел, удержание — shift
+  spc (tap-hold 200 200 spc lsft)
+{{- end }}
 )
 
 ;; ──────────────────────────────────────────────
@@ -94,9 +102,9 @@
 ;; ──────────────────────────────────────────────
 
 (deflayer base
-  @met @f q @t @p @h @j @k @l @v
+  @met @f q @t @p @h @j @k @l @v{{ if eq .machine "laptop" }} @spc{{ end }}
 )
 
 (deflayer meta-held
-  lmet @f @mq @t @p @h @j @k @l @v
+  lmet @f @mq @t @p @h @j @k @l @v{{ if eq .machine "laptop" }} @spc{{ end }}
 )
