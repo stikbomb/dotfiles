@@ -83,14 +83,6 @@
 
   ;; lmet: эмитить lmet нативно + активировать слой meta-held
   met (multi lmet (layer-while-held meta-held))
-
-  ;; q в слое meta-held:
-  ;;   - если Rambox: отправить ctrl+q через wtype
-  ;;   - всегда: эмитить q нативно (lmet уже зажат на том же устройстве → compositor видит lmet+q)
-  mq (multi
-       (cmd sh -c "NIRI_SOCKET=$(ls /run/user/$(id -u)/niri.*.sock 2>/dev/null | head -1); export NIRI_SOCKET; niri msg focused-window 2>/dev/null | grep -qi rambox && wtype -M ctrl -k q")
-       q
-     )
 {{- if eq .machine "laptop" }}
   ;; spc: тап — пробел, удержание — shift
   spc (tap-hold 200 200 spc lsft)
@@ -106,5 +98,5 @@
 )
 
 (deflayer meta-held
-  lmet @f @mq @t @p @h @j @k @l @v{{ if eq .machine "laptop" }} @spc{{ end }}
+  lmet @f q @t @p @h @j @k @l @v{{ if eq .machine "laptop" }} @spc{{ end }}
 )
