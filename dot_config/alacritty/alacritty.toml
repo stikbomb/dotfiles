@@ -1,6 +1,6 @@
 [terminal.shell]
 program = "/usr/bin/zellij"
-args = ["options", "--default-shell", "/usr/bin/nu"]
+args = ["options", "--default-shell", "/usr/bin/zsh"]
 
 [env]
 TERM = "xterm-256color"

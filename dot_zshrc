@@ -1,0 +1,119 @@
+# .zshrc — читается только в интерактивных шеллах.
+
+# ── CachyOS base config ───────────────────────────────────────────────────────
+source /usr/share/cachyos-zsh-config/cachyos-config.zsh
+
+# ── История ───────────────────────────────────────────────────────────────────
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=100000
+SAVEHIST=100000
+setopt SHARE_HISTORY INC_APPEND_HISTORY HIST_IGNORE_DUPS HIST_IGNORE_SPACE
+
+# ── Vi mode ───────────────────────────────────────────────────────────────────
+bindkey -v
+
+# ── Starship ──────────────────────────────────────────────────────────────────
+eval "$(starship init zsh)"
+
+# ── Carapace ──────────────────────────────────────────────────────────────────
+source <(carapace _carapace zsh)
+
+# ── Completions ───────────────────────────────────────────────────────────────
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*'
+
+# ── Алиасы ────────────────────────────────────────────────────────────────────
+alias ll='ls -la'
+alias la='ls -a'
+alias cat='bat'
+alias grep='rg'
+alias top='btop'
+alias cm='chezmoi'
+alias v='nvim'
+alias va='source .venv/bin/activate'
+
+# ── Функции ───────────────────────────────────────────────────────────────────
+# cachyos-config.zsh определяет alias n="ninja" — unalias обязателен,
+# иначе zsh падает с parse error при попытке объявить n() поверх алиаса.
+unalias n 2>/dev/null
+n() { [ $# -eq 0 ] && nva . || nva "$@"; }
+
+# Установить пакеты через paru и добавить в dotfiles tracking
+# Использование:
+#   pkg install foo bar        — поставить и добавить в common.txt
+#   pkg install foo --laptop   — поставить и добавить в laptop.txt
+#   pkg sync                   — показать нетрекнутые пакеты
+pkg() {
+    local dotfiles="$HOME/.local/share/chezmoi/pkgs"
+    case "$1" in
+      install)
+        shift
+        [ $# -eq 0 ] && { echo "Укажи пакеты" >&2; return 1; }
+        local laptop=false pkgs=()
+        for a in "$@"; do
+          [ "$a" = "--laptop" ] && laptop=true || pkgs+=("$a")
+        done
+        paru -S "${pkgs[@]}"
+        local target=common.txt; $laptop && target=laptop.txt
+        for p in "${pkgs[@]}"; do
+          if grep -qx "$p" "$dotfiles/$target" 2>/dev/null; then
+            echo "$p уже есть в $target"
+          else
+            printf '\n%s\n' "$p" >> "$dotfiles/$target"
+            echo "✓ $p → $target"
+          fi
+        done
+        ;;
+      sync)
+        bash "$dotfiles/sync.sh"
+        ;;
+      *)
+        echo "Неизвестное действие: $1. Используй install или sync" >&2
+        return 1
+        ;;
+    esac
+}
+
+# ── glc completions ───────────────────────────────────────────────────────────
+_glc_pull_candidates() {
+    local dir="$PWD"
+    while true; do
+        if [[ -f "$dir/.glc-cache" ]]; then
+            grep -v '^[[:space:]]*$' "$dir/.glc-cache"
+            return
+        fi
+        local parent="${dir:h}"
+        [[ "$parent" == "$dir" ]] && return
+        dir="$parent"
+    done
+}
+
+_glc_push_candidates() {
+    local dir="$PWD"
+    while true; do
+        if [[ -e "$dir/.gitlab" ]]; then
+            local f
+            for f in "$dir"/*.env(N); do
+                print -r -- "${f:t:r}"
+            done
+            return
+        fi
+        local parent="${dir:h}"
+        [[ "$parent" == "$dir" ]] && return
+        dir="$parent"
+    done
+}
+
+_glc() {
+    local -a subcmds
+    subcmds=(list pull push)
+    case $CURRENT in
+      2) _describe 'command' subcmds ;;
+      3)
+        case $words[2] in
+          pull) _values 'env' $(_glc_pull_candidates) ;;
+          push) _values 'env' $(_glc_push_candidates) ;;
+        esac
+        ;;
+    esac
+}
+compdef _glc glc

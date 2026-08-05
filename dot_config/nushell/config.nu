@@ -1,4 +1,7 @@
 # config.nu
+#
+# LEGACY: больше не используется как login shell (см. dot_zshrc/dot_zshenv).
+# Оставлен для ручного запуска (`nu`) и как референс.
 
 # ── Scripts ───────────────────────────────────────────────────────────────────
 source ~/.config/nushell/scripts/curl.nu

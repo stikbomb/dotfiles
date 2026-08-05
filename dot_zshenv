@@ -1,0 +1,19 @@
+# .zshenv — читается на каждый запуск zsh (включая non-interactive),
+# поэтому только export переменных, никакой генерации файлов на диск.
+
+# ── PATH ──────────────────────────────────────────────────────────────────────
+typeset -U path
+path=("$HOME/.local/bin" $path)
+
+# ── Editor / Browser ─────────────────────────────────────────────────────────
+export EDITOR="nva"
+export VISUAL="nva"
+export BROWSER="vivaldi-stable"
+
+# ── Theming ───────────────────────────────────────────────────────────────────
+export QT_QPA_PLATFORMTHEME="qt5ct"
+export GTK_THEME="adw-gtk3-dark"
+
+# ── Man pages через bat ───────────────────────────────────────────────────────
+export MANROFFOPT="-c"
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
