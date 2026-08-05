@@ -14,6 +14,8 @@ chezmoi init --apply git@github.com:stikbomb/dotfiles.git
 ## Структура
 
 ```
+dot_zshenv               — переменные окружения (login shell)
+dot_zshrc                — конфиг оболочки (алиасы, функции, completions, prompt)
 dot_config/
   niri/
     config.kdl          — главный конфиг, подключает модули через include
@@ -28,9 +30,10 @@ dot_config/
       display.kdl.tmpl  — мониторы (шаблон, разный для desktop/laptop)
   alacritty/
     alacritty.toml      — конфиг терминала (Nord тема)
-  nushell/
-    config.nu           — конфиг оболочки
-    env.nu              — переменные окружения
+  nushell/               — LEGACY, больше не login shell (см. dot_zshrc/dot_zshenv);
+                           оставлен для ручного запуска `nu`
+    config.nu
+    env.nu
   kanata/
     kanata.kbd          — ремаппинг клавиш (бинарник kanata-cmd не в репо, см. раздел Клавиатура)
   systemd/user/
@@ -88,7 +91,7 @@ chezmoi update   # git pull + apply
 - `laptop.txt` — только ноут
 - `baseline.txt` — пакеты из базовой установки CachyOS (не редактировать руками)
 
-**Поставить пакет и сразу добавить в tracking** (nushell):
+**Поставить пакет и сразу добавить в tracking**:
 
 ```sh
 pkg install foo bar          # → common.txt
