@@ -1,0 +1,19 @@
+# ── Shell ─────────────────────────────────────────────────────────────────────
+command = /usr/bin/zellij options --default-shell /usr/bin/zsh
+
+# ── Theme (встроенная Nord — соответствует прежней Alacritty-палитре) ─────────
+theme = Nord
+background-opacity = 0.8
+
+# ── Font ──────────────────────────────────────────────────────────────────────
+font-size = 12
+
+# ── Cursor ────────────────────────────────────────────────────────────────────
+cursor-style = underline
+
+# ── Window ────────────────────────────────────────────────────────────────────
+title = Ghostty@CachyOS
+
+# ── Keybinds ──────────────────────────────────────────────────────────────────
+# Shift+Enter шлёт ESC+CR отдельно от обычного Enter (как было в Alacritty)
+keybind = shift+enter=text:\x1b\r

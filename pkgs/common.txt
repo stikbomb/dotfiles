@@ -1,5 +1,6 @@
 # Терминал и оболочка
 alacritty
+ghostty
 nushell
 starship
 fastfetch
