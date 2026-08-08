@@ -11,8 +11,9 @@ $env.VISUAL = "nva"
 $env.BROWSER = "vivaldi-stable"
 
 # ── Theming ───────────────────────────────────────────────────────────────────
-$env.QT_QPA_PLATFORMTHEME = "qt5ct"
-$env.GTK_THEME = "adw-gtk3-dark"
+# GTK-тема живёт в settings.ini + gsettings; GTK_THEME тут не задаём.
+$env.QT_QPA_PLATFORMTHEME = "qt6ct"
+$env.QT_STYLE_OVERRIDE = "kvantum"
 
 # ── Man pages через bat ───────────────────────────────────────────────────────
 $env.MANROFFOPT = "-c"

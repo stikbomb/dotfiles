@@ -7,7 +7,10 @@
         QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
         XDG_SESSION_TYPE "wayland"
         XDG_CURRENT_DESKTOP "niri"
-        QT_QPA_PLATFORMTHEME "gtk3"
+        // Qt6 берёт тему из qt6ct (style=kvantum), Qt5 — из QT_STYLE_OVERRIDE.
+        // Должно совпадать с ~/.zshenv, иначе тема зависит от способа запуска.
+        QT_QPA_PLATFORMTHEME "qt6ct"
+        QT_STYLE_OVERRIDE "kvantum"
     }
 
     debug {
