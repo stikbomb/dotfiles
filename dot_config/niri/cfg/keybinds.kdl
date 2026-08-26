@@ -13,6 +13,7 @@ binds {
     Mod+R           allow-inhibiting=false hotkey-overlay-title="Toggle Rambox" { spawn-sh "/home/stik/.config/niri/scripts/rambox-toggle.sh"; }
     Mod+Return      allow-inhibiting=false hotkey-overlay-title="Open Terminal: Ghostty" { spawn "ghostty"; }
     Mod+D           allow-inhibiting=false hotkey-overlay-title="Open App Launcher: noctalia launcher" { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
+    Mod+P           allow-inhibiting=false hotkey-overlay-title="Clipboard History: noctalia launcher" { spawn-sh "qs -c noctalia-shell ipc call launcher clipboard"; }
     Mod+B           allow-inhibiting=false hotkey-overlay-title="Open Browser: Vivaldi" { spawn "vivaldi"; }
     Mod+ALT+L       allow-inhibiting=false hotkey-overlay-title="Lock Screen: noctalia lock" { spawn-sh "qs -c noctalia-shell ipc call lockScreen lock"; }
     Mod+Shift+Q     allow-inhibiting=false hotkey-overlay-title="Session Menu: noctalia sessionMenu" { spawn-sh "qs -c noctalia-shell ipc call sessionMenu toggle"; }
