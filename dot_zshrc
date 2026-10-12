@@ -25,6 +25,22 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*'
 eval "$(zoxide init zsh)"
 eval "$(direnv hook zsh)"
 
+# ── Zellij: имя таба = имя директории ─────────────────────────────────────────
+# Без явного имени zellij показывает в табе заголовок активной панели, поэтому
+# таб переименовывается сам, когда в нём стартует nvim/claude/etc.
+# rename-tab задаёт имя явно — после этого zellij его больше не трогает.
+if [[ -n $ZELLIJ ]]; then
+  _zellij_rename_tab() {
+    local name=${PWD:t}
+    [[ $PWD == $HOME ]] && name='~'
+    [[ $PWD == / ]] && name='/'
+    zellij action rename-tab "$name" &>/dev/null
+  }
+  autoload -Uz add-zsh-hook
+  add-zsh-hook chpwd _zellij_rename_tab
+  _zellij_rename_tab
+fi
+
 # ── Алиасы ────────────────────────────────────────────────────────────────────
 alias ll='ls -la'
 alias la='ls -a'

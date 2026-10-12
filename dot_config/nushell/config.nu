@@ -72,3 +72,17 @@ def pkg [
         }
     }
 }
+
+# ── Zellij: имя таба = имя директории ─────────────────────────────────────────
+# Без явного имени zellij показывает в табе заголовок активной панели, поэтому
+# таб переименовывается сам, когда в нём стартует nvim/claude/etc.
+# rename-tab задаёт имя явно — после этого zellij его больше не трогает.
+$env.config.hooks.env_change.PWD = (
+    ($env.config.hooks.env_change.PWD? | default [])
+    ++ [{|before, after|
+        if ($env.ZELLIJ? | is-not-empty) {
+            let name = if $after == $nu.home-path { "~" } else { $after | path basename }
+            zellij action rename-tab $name | ignore
+        }
+    }]
+)
