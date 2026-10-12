@@ -1,0 +1,18 @@
+[bar.default]
+end = [
+    "media",
+    "tray",
+    "notifications",
+    "clipboard",
+    "network",
+    "bluetooth",
+    "volume",
+    "brightness",
+    "battery",
+    "control-center",
+    "session",
+    "keyboard_layout"
+]
+
+[osd.kinds]
+keyboard_layout = false
