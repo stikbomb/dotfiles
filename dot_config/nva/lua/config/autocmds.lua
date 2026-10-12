@@ -9,3 +9,12 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     vim.b.autoformat = false
   end,
 })
+
+-- LazyVim включает spell для markdown/text — на русском тексте это сплошное
+-- красное подчёркивание. Выключаем; <leader>us включает обратно точечно.
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "markdown", "text", "gitcommit" },
+  callback = function()
+    vim.opt_local.spell = false
+  end,
+})
