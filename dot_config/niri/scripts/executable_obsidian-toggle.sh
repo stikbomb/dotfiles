@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-APP_ID="obsidian"
+APP_ID="md.obsidian.Obsidian"
 HIDDEN_WS=9
 HIDDEN_FILE="/tmp/obsidian-hidden"
 PREV_WIN_FILE="/tmp/obsidian-prev-win"
@@ -8,7 +8,9 @@ WINDOWS=$(niri msg -j windows 2>/dev/null)
 WIN_ID=$(echo "$WINDOWS" | jq -r "[.[] | select(.app_id == \"$APP_ID\")][0].id // empty")
 
 if [ -z "$WIN_ID" ]; then
-    obsidian &
+    # ~/.local/bin/obsidian is the Obsidian CLI, not the app
+    APPIMAGE=$(ls -1v "$HOME"/.local/bin/Obsidian-*.AppImage 2>/dev/null | tail -n1)
+    setsid -f "$APPIMAGE" --no-sandbox >/dev/null 2>&1
     exit 0
 fi
 
